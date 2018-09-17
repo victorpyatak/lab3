@@ -1,5 +1,7 @@
 #include <iostream>
 #include <iomanip>
+#include <cstdlib>
+#include <cmath>
 
 using namespace std;
 
@@ -37,25 +39,34 @@ void diag() {
 	cout << endl;
 }
  
-void upperDiag() {
-	float sum = 0.0,
-		counter = 0;
+void geomAvg() {
+	int i, j;
+	int mult;
+	float result = 1.0,
+		  sum = 0.0,
+		  counter = 0.0;
 
-	float average;
-
-	for (int i = 0; i < rows; i++) {
-		for (int j = 0; j < cols; j++) {
-			while (j>i) {
+	for (i = 0; i < rows; i++) {
+		for (j = 0; j < cols; j++) {
+			if (j > i) {
+				mult = matrix[i][j];
+				result *= mult;
 				counter++;
-				sum += matrix[i][j];
-				break;
 			}
+			else if ((j == i) && (result != 1.0)) {
+				cout << "Average geometrical of row " << i << " is :";
+				cout << pow(result, 1 / counter) << endl << endl;
+				sum += pow(result, 1 / counter);
+				result = 1.0;
+				counter = 0.0;
+			}
+
 		}
+
 	}
-	average = sum / counter;
-	cout << "The sum of elements above diagonal is : " << sum << endl;
-	cout << "Average value of elements above diagonal is : " << average << endl << endl;
+	cout << "The sum is :" << sum << endl << endl;
 }
+
 void sorted() {
 	int i, j, temp, Void;
 	cout << "Sorted matrix :" << endl;
@@ -79,14 +90,12 @@ void sorted() {
 	}
 }
 
-
-
 int main() {
 	rowsNcols();
-	checkMatrix();
+	//checkMatrix();
 	addData();
-	diag();
-	upperDiag();
+	//diag();
+	geomAvg();
 	sorted();
 	return 0;
 }
