@@ -22,7 +22,7 @@ void checkMatrix() {
 	}
 }
 
-void addData() {
+void enterMatrixElements() {
 	for (int i = 0; i < rows; i++) {
 		for (int j = 0; j < cols; j++) {
 			cout << "Enter matrix elements " << i + 1 << "-" << j + 1 << " :";
@@ -39,26 +39,26 @@ void diag() {
 	cout << endl;
 }
  
-void geomAvg() {
-	int i, j;
-	int mult;
+void geometricalAverage() {
+	int matrixRows, matrixCols;
+	int multiplication;
 	float result = 1.0,
 		  sum = 0.0,
-		  counter = 0.0;
+		  powerCounter = 0.0;
 
-	for (i = 0; i < rows; i++) {
-		for (j = 0; j < cols; j++) {
-			if (j > i) {
-				mult = matrix[i][j];
-				result *= mult;
-				counter++;
+	for (i = 0; matrixRows < rows; matrixRows++) {
+		for (j = 0; matrixCols < cols; j++) {
+			if (matrixCols > matrixRows) {
+				multiplication = matrix[matrixRows][matrixCols];
+				result *= multiplication;
+				powerCounter++;
 			}
-			else if ((j == i) && (result != 1.0)) {
-				cout << "Average geometrical of row " << i << " is :";
+			else if ((matrixCols == matrixRows) && (result != 1.0)) {
+				cout << "Average geometrical of row " << matrixRows << " is :";
 				cout << pow(result, 1 / counter) << endl << endl;
 				sum += pow(result, 1 / counter);
 				result = 1.0;
-				counter = 0.0;
+				powerCounter = 0.0;
 			}
 
 		}
@@ -67,7 +67,7 @@ void geomAvg() {
 	cout << "The sum is :" << sum << endl << endl;
 }
 
-void sorted() {
+void sortMatrixColumns() {
 	int i, j, temp, Void;
 	cout << "Sorted matrix :" << endl;
 	for (j = 0; j < cols; j++) {
@@ -93,9 +93,9 @@ void sorted() {
 int main() {
 	rowsNcols();
 	//checkMatrix();
-	addData();
+	enterMatrixElements();
 	//diag();
-	geomAvg();
-	sorted();
+	geometricalAverage();
+	sortMatrixColumns();
 	return 0;
 }
